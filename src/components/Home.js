@@ -1,21 +1,65 @@
+/* eslint-disable no-dupe-keys */
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const heading = {
+    display: 'flex',
+    fontSize: '1.6rem',
+    color: 'teal',
+    fontWeight: 300, 
+    flexDirection: 'column',
+    textAlign: 'center',
+    justifyContent: 'center',
+    fontWeight: "bold",
+  };
+
+  const pStyle = {
+    display: 'flex',
+      fontSize:  '1.0rem',
+      textAlign: 'center',
+      alignItems: 'center',
+      flexWrap: 'wrap',
+      border: '4px solid',
+      borderRadius: '10px',
+      borderColor: 'teal',
+      backgroundColor: 'white',
+      padding: 20,
+      marginTop: 20,
+      justifyContent: 'center',
+      width: 'auto',
+    
+      
+
+    };
+
+    const btnStyle = {
+      display: 'flex',
+      justifyContent: 'center',
+      background: 'orangered',
+      color: 'white',
+      borderRadius: '10px',
+      alignItems: 'center'
+
+    }
+   
+
+  
   return (
-    <div className="upper-container">
-      <h1>ABOUT FITNESS CONNECTION</h1>
-      <p>
-        Fitness Connection was created to form a community for fitness
-        enthusiast, those interested in starting their fitness journey and
-        anyone in between. On this site you will be able to find the exercise
-        training that works for you. Weather it be strength training, cardio,
-        CrossFit, flexibility, or any type of exercise that interests you.
-        Create an account today to be part of a community that supports and
-        uplifts you every step of the way!
+    <div className="upper-container" style={{background: "linear-gradient(#ffffff, #009e9e)", height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+     
+      <p style={pStyle}>
+      <h1 style={heading}>ABOUT FITNESS CONNECTION</h1>
+      Fitness Connection was established with the vision of building a vibrant community for fitness enthusiasts at every stage of their journey, whether they are seasoned athletes or beginners taking their first steps towards a healthier lifestyle. Our platform offers a diverse array of exercise training options tailored to suit your preferences and goals. Whether you're passionate about strength training, cardio workouts, CrossFit challenges, improving flexibility, or exploring any other form of exercise, you'll find comprehensive resources and guidance here. Join us by creating an account today and become part of a supportive community that encourages and uplifts you through every milestone of your fitness journey!
+
+
+
+
+
       </p>
-      <a href="account.html">
-        <button className="join-button">JOIN NOW!</button>
-      </a>
+
+      <button onClick={() => navigate("/account")}style={btnStyle}>JOIN US!</button>
     </div>
   );
 };

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Update = () => {
-  const {id} = useParams()
+  const { id } = useParams();
   const [updatedExercise, setUpdatedExercise] = useState({
-    exerciseName: "",
-    exerciseType: "",
+    exercise: "",
+    type: "",
     description: "",
   });
   useEffect(() => {
@@ -25,36 +25,45 @@ const Update = () => {
   };
   const handleUpdateFormSubmit = (e) => {
     e.preventDefault();
+    console.log(JSON.stringify(updatedExercise));
+    const body = {
+      type: e.target.type.value,
+      exercise: e.target.exercise.value,
+      description: e.target.description.value,
+    };
     fetch(`http://localhost:4000/api/exercise/edit/${id}`, {
-      method: "POST",
-      body: JSON.stringify(updatedExercise),
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
     })
       .then((response) => response.json())
       .then((result) => {
         console.log(result.data);
         setUpdatedExercise(result.data);
       });
-  };
+  }; 
   return (
     <div>
-      <form on onSubmit={handleUpdateFormSubmit}>
-        <label htmlFor="exerciseName">Exercise</label>
+      <form onSubmit={handleUpdateFormSubmit}>
+        <label htmlFor="exercise">Exercise</label>
         <input
           type="text"
-          id="exerciseName"
-          name="exerciseName"
+          id="exercise"
+          name="exercise"
           placeholder="Exercise"
-          value={updatedExercise.exerciseName}
+          value={updatedExercise.exercise}
           onChange={handleInputChange}
         />
 
         <label htmlFor="exerciseType">Type</label>
         <input
           type="text"
-          id="exerciseType"
-          name="exerciseType"
-          placeholder="Type"
-          value={updatedExercise.exerciseType}
+          id="type"
+          name="type"
+          placeholder="type"
+          value={updatedExercise.type}
           onChange={handleInputChange}
         />
 
@@ -67,6 +76,7 @@ const Update = () => {
           value={updatedExercise.description}
           onChange={handleInputChange}
         />
+        <button type="submit">UPDATE</button>
       </form>
     </div>
   );
